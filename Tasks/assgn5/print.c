@@ -81,7 +81,7 @@ extern A_TYPE *int_type, *float_type, *char_type, *void_type, *string_type;
 void print_node(A_NODE *node, int s)
 {
 	print_space(s);
-	printf("%s (%x,%d)\n", node_name[node->name],node->type,node->value);
+	printf("%s\n", node_name[node->name]);
 }
 void print_space(int s)
 {

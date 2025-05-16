@@ -22,10 +22,6 @@ ws          {delim}+
 %%
 {ws}        { }
 {line}      { }
-int         { return(TYPE_IDENTIFIER); }
-char        { return(TYPE_IDENTIFIER); }
-float       { return(TYPE_IDENTIFIER); }
-void        { return(TYPE_IDENTIFIER); }
 auto        { return(AUTO_SYM); }
 break       { return(BREAK_SYM); }
 case        { return(CASE_SYM); }
