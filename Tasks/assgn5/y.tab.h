@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.8.2.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,9 +31,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
 
 #ifndef YY_YY_Y_TAB_H_INCLUDED
 # define YY_YY_Y_TAB_H_INCLUDED
@@ -45,78 +44,69 @@
 extern int yydebug;
 #endif
 
-/* Token kinds.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    IDENTIFIER = 258,              /* IDENTIFIER  */
-    TYPE_IDENTIFIER = 259,         /* TYPE_IDENTIFIER  */
-    FLOAT_CONSTANT = 260,          /* FLOAT_CONSTANT  */
-    INTEGER_CONSTANT = 261,        /* INTEGER_CONSTANT  */
-    CHARACTER_CONSTANT = 262,      /* CHARACTER_CONSTANT  */
-    STRING_LITERAL = 263,          /* STRING_LITERAL  */
-    PLUS = 264,                    /* PLUS  */
-    MINUS = 265,                   /* MINUS  */
-    PLUSPLUS = 266,                /* PLUSPLUS  */
-    MINUSMINUS = 267,              /* MINUSMINUS  */
-    BAR = 268,                     /* BAR  */
-    AMP = 269,                     /* AMP  */
-    BARBAR = 270,                  /* BARBAR  */
-    AMPAMP = 271,                  /* AMPAMP  */
-    ARROW = 272,                   /* ARROW  */
-    SEMICOLON = 273,               /* SEMICOLON  */
-    LSS = 274,                     /* LSS  */
-    GTR = 275,                     /* GTR  */
-    LEQ = 276,                     /* LEQ  */
-    GEQ = 277,                     /* GEQ  */
-    EQL = 278,                     /* EQL  */
-    NEQ = 279,                     /* NEQ  */
-    DOTDOTDOT = 280,               /* DOTDOTDOT  */
-    LP = 281,                      /* LP  */
-    RP = 282,                      /* RP  */
-    LB = 283,                      /* LB  */
-    RB = 284,                      /* RB  */
-    LR = 285,                      /* LR  */
-    RR = 286,                      /* RR  */
-    PERIOD = 287,                  /* PERIOD  */
-    COMMA = 288,                   /* COMMA  */
-    EXCL = 289,                    /* EXCL  */
-    STAR = 290,                    /* STAR  */
-    SLASH = 291,                   /* SLASH  */
-    PERCENT = 292,                 /* PERCENT  */
-    ASSIGN = 293,                  /* ASSIGN  */
-    COLON = 294,                   /* COLON  */
-    AUTO_SYM = 295,                /* AUTO_SYM  */
-    STATIC_SYM = 296,              /* STATIC_SYM  */
-    TYPEDEF_SYM = 297,             /* TYPEDEF_SYM  */
-    STRUCT_SYM = 298,              /* STRUCT_SYM  */
-    ENUM_SYM = 299,                /* ENUM_SYM  */
-    SIZEOF_SYM = 300,              /* SIZEOF_SYM  */
-    UNION_SYM = 301,               /* UNION_SYM  */
-    IF_SYM = 302,                  /* IF_SYM  */
-    ELSE_SYM = 303,                /* ELSE_SYM  */
-    WHILE_SYM = 304,               /* WHILE_SYM  */
-    DO_SYM = 305,                  /* DO_SYM  */
-    FOR_SYM = 306,                 /* FOR_SYM  */
-    CONTINUE_SYM = 307,            /* CONTINUE_SYM  */
-    BREAK_SYM = 308,               /* BREAK_SYM  */
-    RETURN_SYM = 309,              /* RETURN_SYM  */
-    SWITCH_SYM = 310,              /* SWITCH_SYM  */
-    CASE_SYM = 311,                /* CASE_SYM  */
-    DEFAULT_SYM = 312              /* DEFAULT_SYM  */
+    IDENTIFIER = 258,
+    TYPE_IDENTIFIER = 259,
+    FLOAT_CONSTANT = 260,
+    INTEGER_CONSTANT = 261,
+    CHARACTER_CONSTANT = 262,
+    STRING_LITERAL = 263,
+    PLUS = 264,
+    MINUS = 265,
+    PLUSPLUS = 266,
+    MINUSMINUS = 267,
+    BAR = 268,
+    AMP = 269,
+    BARBAR = 270,
+    AMPAMP = 271,
+    ARROW = 272,
+    SEMICOLON = 273,
+    LSS = 274,
+    GTR = 275,
+    LEQ = 276,
+    GEQ = 277,
+    EQL = 278,
+    NEQ = 279,
+    DOTDOTDOT = 280,
+    LP = 281,
+    RP = 282,
+    LB = 283,
+    RB = 284,
+    LR = 285,
+    RR = 286,
+    PERIOD = 287,
+    COMMA = 288,
+    EXCL = 289,
+    STAR = 290,
+    SLASH = 291,
+    PERCENT = 292,
+    ASSIGN = 293,
+    COLON = 294,
+    AUTO_SYM = 295,
+    STATIC_SYM = 296,
+    TYPEDEF_SYM = 297,
+    STRUCT_SYM = 298,
+    ENUM_SYM = 299,
+    SIZEOF_SYM = 300,
+    UNION_SYM = 301,
+    IF_SYM = 302,
+    ELSE_SYM = 303,
+    WHILE_SYM = 304,
+    DO_SYM = 305,
+    FOR_SYM = 306,
+    CONTINUE_SYM = 307,
+    BREAK_SYM = 308,
+    RETURN_SYM = 309,
+    SWITCH_SYM = 310,
+    CASE_SYM = 311,
+    DEFAULT_SYM = 312
   };
-  typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
+/* Tokens.  */
 #define IDENTIFIER 258
 #define TYPE_IDENTIFIER 259
 #define FLOAT_CONSTANT 260
@@ -183,8 +173,6 @@ typedef int YYSTYPE;
 
 extern YYSTYPE yylval;
 
-
 int yyparse (void);
-
 
 #endif /* !YY_YY_Y_TAB_H_INCLUDED  */

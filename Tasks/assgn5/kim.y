@@ -69,7 +69,7 @@ declaration
 
 declaration_specifiers
     : type_specifier    {$$=makeSpecifier($1,0);}
-    | storage_class_specifier   {##=makeSpecifier(0,$1);}
+    | storage_class_specifier   {$$=makeSpecifier(0,$1);}
     | type_specifier declaration_specifiers {$$=updateSpecifier($2,$1,0);}
     | storage_class_specifier declaration_specifiers    {updateSpecifier($2,0,$1);}
     ;
