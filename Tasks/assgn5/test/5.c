@@ -1,7 +1,3 @@
-void foo(undefinedType a) {  // 존재하지 않는 타입 사용
-}
-
-int main() {
-    foo(10);
+int testFunc(void x) {
     return 0;
 }
