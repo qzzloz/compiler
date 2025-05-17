@@ -1,1 +1,3 @@
-auto extern x;
+void func() {
+    int x = (static int) 3;
+}

@@ -1,7 +1,5 @@
-inline extern int func() {  // 잘못된 함수 지정자 조합
-    return 1;
-}
+typedef int myint;
 
-int main() {
-    return func();
+typedef myint func() {
+    return 1;
 }
