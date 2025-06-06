@@ -3,7 +3,7 @@
     typedef long YYSTYPE;
 	
     #include "type.h"
-	#include "park.h"
+	#include "kim.h"
 	#include <stdio.h>
 	#include <stdlib.h>
 	
