@@ -1271,7 +1271,7 @@ void semantic_error(int i, int ll) {
 			break;
 		case 39: printf("illegal type size in sizeof operation (case %d)\n",i);
 			break;
-		case 40: printf("illegal expression type in rational operation (case %d)\n",i);
+		case 40: printf("illegal expression type in relational operation (case %d)\n",i);
 			break;
 		// case 41: printf("incompatible type in literal \n");
 		// break;
@@ -1307,13 +1307,13 @@ void semantic_error(int i, int ll) {
 			break;
 		case 84: printf("illegal type in strcut or union filed (case %d)\n",i);
 			break;
-		case 85: printf("invalied function return type (case %d)\n",i);
+		case 85: printf("invalid function return type (case %d)\n",i);
 			break;
 		case 86: printf("illegal array size or empty array (case %d)\n",i);
 			break;
-		case 90: printf("??");
+		case 90: printf("fatal compiler error in parser result");
 			break;
-		case 93: printf("!!");
+		case 93: printf("too many literals in source program");
 			break;
 		// Self-referential struct
 		case 99: printf("Self-referential struct declaration is not allowed. (case %d)\n", i);
