@@ -1,4 +1,8 @@
-int main(){
-    float v;
-    v=2.4;
+int main() {
+    float f;
+    int i;
+    
+    f = 3.14;
+    i = (int)f;
+    return i;
 }

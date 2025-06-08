@@ -1316,8 +1316,8 @@ void semantic_error(int i, int ll) {
 		case 93: printf("too many literals in source program");
 			break;
 		// Self-referential struct
-		case 99: printf("Self-referential struct declaration is not allowed. (case %d)\n", i);
-			break;
+		// case 99: printf("Self-referential struct declaration is not allowed. (case %d)\n", i);
+		// 	break;
 		default: printf("unknown \n");
 			break;
 	}
