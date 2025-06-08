@@ -1,4 +1,4 @@
 int main() {
-    void array[10]; // Error: illegal element type of array declarator
+    void array[10];
     return 0;
 }

@@ -3,10 +3,9 @@ union Data {
     float f;
 };
 
-void test_union_in_logical_op() {
+void main() {
     union Data data;
     int result;
     
-    // Error 27: union is not a scalar type
-    result = !data;  // Should trigger error 27
+    result = !data;
 }

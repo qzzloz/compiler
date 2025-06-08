@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     yyparse(); 
     if (syntax_err) exit(1);
     print_ast(root);
-    printf("-------------------------------------------------------\n");
+    printf("**********************************************\n");
     semantic_analysis(root);
     if (semantic_err) exit(1);
     print_sem_ast(root);
