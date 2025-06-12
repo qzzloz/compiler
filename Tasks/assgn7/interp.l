@@ -5,21 +5,21 @@ line	[\n]
 ws	{delim}+
 
 %{
-#defineYYSTYPE_IS_DECLARED1
-typedeflongYYSTYPE;
-#include"y.tab.h"
+#define YYSTYPE_IS_DECLARED 1
+typedef long YYSTYPE;
+#include "y.tab.h"
 
-intline_no=1;
+extern int line_no;
 
 intsearch_opcode();
 intis_inst2();
-char*makeString();
+char *makeString();
 %}
 
 %%
 
 {ws}	{ }
-{line}	{ line_no++; return(NEW_LINE);};
+{line} {line_no++; return(NEW_LINE);};
 "\.global_word"	{ return(GLOBAL_WORD_SYM);}
 "\.global_byte"	{ return(GLOBAL_BYTE_SYM);}
 "\.literal"	{ return(LITERAL_SYM);}

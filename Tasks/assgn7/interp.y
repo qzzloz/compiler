@@ -1,40 +1,39 @@
 %{
-#defineYYSTYPE_IS_DECLARED1
-typedeflongYYSTYPE;
+#define YYSTYPE_IS_DECLARED 1
+typedef long YYSTYPE;
 #include<stdio.h>
 #include<string.h>
-#include"type.h"
-floatatof();
-externFILE*yyin;
-externchar*yytext;
-externintline_no;
-intpc=0;
-struct{char*name;intaddr;}symbol[SYMBOL_MAX];
-intdx=0;
-intstack[STACK_MAX];
-INSTRUCTIONcode[CODE_MAX];
-float*stack_f;
-int*stack_i;
-char*stack_c;
-intsyntax_err=0;
-intsemantic_err=0;
+#include "kim.h"
+float atof();
+extern FILE *yyin;
+extern char *yytext;
+extern int line_no;
+int pc=0;
+struct{char *name; int addr;} symbol[SYMBOL_MAX];
+int dx=0;
+int stack[STACK_MAX];
+INSTRUCTION code[CODE_MAX];
+float *stack_f;
+int *stack_i;
+char *stack_c;
+extern int semantic_err;
 
-intsearch_symbol();
-intsearch_opcode();
-voidput_symbol();
-intget_symbol();
-voidput_data();
-voidprint_code();
-voidprint_symbol();
-intis_inst2();
-voidassem2();
-voidgen_code();
-voidinterp();
-voidassemble_error();
-voiddump_statck();
-voidruntime_error();
-voidinitialize();
-intbase();
+int search_symbol();
+int search_opcode();
+void put_symbol();
+int get_symbol();
+void put_data();
+void print_code();
+void print_symbol();
+int is_inst2();
+void assem2();
+void gen_code();
+void interp();
+void assemble_error();
+void dump_statck();
+void runtime_error();
+void initialize();
+int base();
 
 %}
 
@@ -74,7 +73,7 @@ directive
 %%
 
 
-intsearch_symbol(char*s)
+int search_symbol(char *s)
 {
 	int i;
 	for (i=dx; i>0; i--) {
@@ -84,7 +83,7 @@ intsearch_symbol(char*s)
 
 }
 
-intget_symbol(char*s)
+int get_symbol(char *s)
 {
 	int i;
 	i=search_symbol(s);
@@ -95,7 +94,7 @@ intget_symbol(char*s)
 	return(i);	
 }
 
-voidput_symbol(char*s,intp)
+void put_symbol(char *s,int p)
 {
 	int i;
 	i=search_symbol(s);
@@ -111,7 +110,7 @@ voidput_symbol(char*s,intp)
 	}
 }
 
-voidput_data(inti,intk,char*s)
+void put_data(int i, int k, char *s)
 {
 	int a;
 	if (k==1)
@@ -127,7 +126,7 @@ voidput_data(inti,intk,char*s)
 	assemble_error(100);
 }
 
-voidprint_symbol()
+void print_symbol()
 {
 	int i;
 	printf("======== symbol =========\n");
@@ -136,7 +135,7 @@ voidprint_symbol()
 	}
 }
 
-intis_inst2(OPCODEop)
+int is_inst2(OPCODE op)
 {
 	if (op==JMP || op==JPC || op==JPT || op==JPCR || op==JPTR
 	|| op==ADDR || op==SUP )
@@ -146,7 +145,7 @@ intis_inst2(OPCODEop)
 
 }
 
-voidassem2()
+void assem2()
 {
 	int i,j;
 	for (i=0; i<pc; i++) 
@@ -158,7 +157,7 @@ voidassem2()
 	code[i].a=symbol[j].addr; }
 }
 
-voidgen_code(OPCODEop,intl,longa)
+void gen_code(OPCODE op, int l, long a)
 {
 	if (pc>=CODE_MAX) 
 	assemble_error(10);
@@ -170,7 +169,7 @@ voidgen_code(OPCODEop,intl,longa)
 	}
 }
 
-char*opcode_name[]={"OP_NULL","LOD","LDX","LDXB","LDA","LITI",
+char *opcode_name[]={"OP_NULL","LOD","LDX","LDXB","LDA","LITI",
 	"STO","STOB","STX","STXB",
 	"SUBI","SUBF","DIVI","DIVF","ADDI","ADDF","OFFSET","MULI","MULF", "MOD", 
 	"LSSI","LSSF","GTRI","GTRF", "LEQI","LEQF","GEQI","GEQF","NEQI","NEQF","EQLI","EQLF",
@@ -179,7 +178,7 @@ char*opcode_name[]={"OP_NULL","LOD","LDX","LDXB","LDA","LITI",
 	"INT","INCI","INCF","DECI","DECF", "SUP","CAL","ADDR", 
 	"RET", "MINUSI","MINUSF","LDI","LDIB","POP"} ;
 
-intsearch_opcode(char*s)
+int search_opcode(char *s)
 {
 	int i;
 	for (i=NOP-1; i>0;i--) {
@@ -188,7 +187,7 @@ intsearch_opcode(char*s)
 	return(i);
 }
 
-voidprint_code()
+void print_code()
 {
 	OPCODE op;
 	int i;
@@ -198,7 +197,7 @@ voidprint_code()
 	code[i].l, code[i].a);}
 }
 
-voidinitialize()
+void initialize()
 {
 	stack_i=stack;
 	stack_f=stack;
@@ -207,8 +206,8 @@ voidinitialize()
 	put_symbol("malloc",-2);
 	put_symbol("scanf",-3);
 }
-
-voidmain(intargc,char*argv[])
+/*
+void main(int argc, char *argv[])
 {
 	if (argc==1){
 	printf("source file not given\n");
@@ -226,9 +225,9 @@ voidmain(intargc,char*argv[])
 	print_code();
 	interp();
 
-}
+}*/
 
-yyerror(char*s)
+yyerror(char *s)
 {
 	syntax_err++;
 	printf("syntax error at line %d: near %s\n",line_no,yytext);
@@ -236,7 +235,7 @@ yyerror(char*s)
 }
 
 
-voidassemble_error(inti,char*s)
+void assemble_error(int i,char *s)
 {
 	switch (i) {
 	case 1: printf("error: undefined identifier %s\n",s);
