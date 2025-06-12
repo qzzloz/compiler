@@ -31,18 +31,18 @@ void main(int argc, char *argv[])
 	if ((yyin=fopen(argv[argc-1],"r"))==NULL){
 		printf("can not open input file: %s\n",argv[argc-1]);
 		exit(1);}
-	printf("\nstart syntax analysis\n");
+	printf("\n>>>>>>>>>> start syntax analysis\n");
 	initialize();
 	yyparse();
 	if (syntax_err) exit(1);
 	// print_ast(root);
-	printf("\nstart semantic analysis\n");
+	printf("\n>>>>>>>>>> start semantic analysis\n");
 	semantic_analysis(root);
 	if (semantic_err) exit(1);
 	// print_sem_ast(root);
-	printf("start code generation\n");
+	printf("\n>>>>>>>>>> start code generation\n");
 	code_generation(root);
-	printf("end code generation\n");
+	printf("\n>>>>>>>>>> end code generation\n");
 	exit(0);
 }
 
