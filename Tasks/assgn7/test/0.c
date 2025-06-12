@@ -1,6 +1,7 @@
 int main() {
-    float f;
-    int i;
-    
-    f = 3.14;
+    enum A {h1, h2, h3};
+    int x, y, z;
+    enum A a;
+    a = h1;
+    x+a;
 }

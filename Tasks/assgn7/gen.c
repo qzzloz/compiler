@@ -1,81 +1,81 @@
 #include <stdio.h>
 #include <string.h>
 #include "type.h"
-// typedef enum op {
-//     OP_NULL, 
-//     LOD,
-//     LDX,
-//     LDXB,
-//     LDA, 
-//     LITI, 
-//     STO,
-//     STOB,
-//     STX,
-//     STXB,
-//     SUBI,
-//     SUBF,
-//     DIVI,
-//     DIVF,
-//     ADDI, 
-//     ADDF, 
-//     OFFSET, 
-//     MULI, 
-//     MULF, 
-//     MOD, 
-//     LSSI,
-//     LSSF, 
-//     GTRI, 
-//     GTRF, 
-//     LEQI, 
-//     LEQF, 
-//     GEQI, 
-//     GEQF, 
-//     NEQI, 
-//     NEQF, 
-//     EQLI, 
-//     EQLF,
-//     NOT, 
-//     OR, 
-//     AND, 
-//     CVTI,
-//     CVTF, 
-//     JPC,
-//     JPCR,
-//     JMP,
-//     JPT,
-//     JPTR,
-//     INT,
-//     INCI,
-//     INCF,
-//     DECI, 
-//     DECF,
-//     SUP, 
-//     CAL,
-//     ADDR, 
-//     RET, 
-//     MINUSI, 
-//     MINUSF,
-//     CHK,
-//     LDI,
-//     LDIB,
-//     SWITCH,
-//     SWVALUE,
-//     SWDEFAULT,
-//     SWLABEL,
-//     SWEND,
-//     POP, 
-//     POPB
-// } OPCODE;
-// typedef struct {OPCODE f; int l; int a;} INSTRUCTION;
+typedef enum op {
+    OP_NULL, 
+    LOD,
+    LDX,
+    LDXB,
+    LDA, 
+    LITI, 
+    STO,
+    STOB,
+    STX,
+    STXB,
+    SUBI,
+    SUBF,
+    DIVI,
+    DIVF,
+    ADDI, 
+    ADDF, 
+    OFFSET, 
+    MULI, 
+    MULF, 
+    MOD, 
+    LSSI,
+    LSSF, 
+    GTRI, 
+    GTRF, 
+    LEQI, 
+    LEQF, 
+    GEQI, 
+    GEQF, 
+    NEQI, 
+    NEQF, 
+    EQLI, 
+    EQLF,
+    NOT, 
+    OR, 
+    AND, 
+    CVTI,
+    CVTF, 
+    JPC,
+    JPCR,
+    JMP,
+    JPT,
+    JPTR,
+    INT,
+    INCI,
+    INCF,
+    DECI, 
+    DECF,
+    SUP, 
+    CAL,
+    ADDR, 
+    RET, 
+    MINUSI, 
+    MINUSF,
+    CHK,
+    LDI,
+    LDIB,
+    SWITCH,
+    SWVALUE,
+    SWDEFAULT,
+    SWLABEL,
+    SWEND,
+    POP, 
+    POPB
+} OPCODE;
+typedef struct {OPCODE f; int l; int a;} INSTRUCTION;
 
-// char *opcode_name[]={ "OP_NULL", "LOD", "LDX", "LDXB", "LDA", "LITI",
-// "STO", "STOB", "STX", "STXB", "SUBI","SUBF", "DIVI", "DIVF", "ADDI", "ADDF", "OFFSET", "MULI",
-// "MULF", "MOD", "LSSI","LSSF", "GTRI","GTRF",
-// "LEQI","LEQF", "GEQI", "GEQF", "NEQI","NEQF", "EQLI","EQLF",
-// "NOT", "OR", "AND", "CVTI", "CVTF", "JPC", "JPCR", "JMP","JPT","JPTR", "INT","INCI","INCF",
-// "DECI","DECF","SUP","CAL","ADDR","RET",
-// "MINUSI","MINUSF","CHK","LDI","LDIB",
-// "SWITCH", "SWVALUE", "SWDEFAULT", "SWLABEL","SWEND","POP","POPB"};
+char *opcode_name[]={ "OP_NULL", "LOD", "LDX", "LDXB", "LDA", "LITI",
+"STO", "STOB", "STX", "STXB", "SUBI","SUBF", "DIVI", "DIVF", "ADDI", "ADDF", "OFFSET", "MULI",
+"MULF", "MOD", "LSSI","LSSF", "GTRI","GTRF",
+"LEQI","LEQF", "GEQI", "GEQF", "NEQI","NEQF", "EQLI","EQLF",
+"NOT", "OR", "AND", "CVTI", "CVTF", "JPC", "JPCR", "JMP","JPT","JPTR", "INT","INCI","INCF",
+"DECI","DECF","SUP","CAL","ADDR","RET",
+"MINUSI","MINUSF","CHK","LDI","LDIB",
+"SWITCH", "SWVALUE", "SWDEFAULT", "SWLABEL","SWEND","POP","POPB"};
 typedef enum {SW_VALUE,SW_DEFAULT} SW_KIND;
 typedef struct sw {SW_KIND kind; int val; int label;} A_SWITCH;
 void code_generation(A_NODE *);
@@ -488,6 +488,15 @@ void gen_expression(A_NODE *node){
             else
                 gen_code_i(STX,0, 1%4 ? i/4+1 : i/4);
             break;
+        case N_EXP_ASSIGN:
+                gen_expression_left(node->llink);
+                gen_expression(node->rlink);
+                i = node->type->size;
+                if(i==1)
+                    gen_code_i(STXB, 0, 0);
+                else
+                    gen_code_i(STX, 0, i%4 ? i/4+1 : i/4);
+                break;
         default:
             gen_error(100,node->line);
             break;
@@ -618,6 +627,7 @@ int get_label()
 
 void gen_statement(A_NODE *node, int cont_label, int break_label, A_SWITCH sw[], int *sn)
 {
+    // printf(">> gen_statement node->name = %d\n", node->name);
     A_SWITCH switch_table[100];
     int switch_no = 0;
     A_NODE *n;

@@ -1,8 +1,7 @@
 #include <stdio.h>
-// #include <stdlib.h>
+#include <stdlib.h>
 #include <string.h>
 #include "y.tab.h"
-#include "type.h"
 
 extern char* yytext;
 A_TYPE *int_type, *char_type, *void_type, *float_type, *string_type;
@@ -471,7 +470,7 @@ BOOLEAN isPointerOrArrayType(A_TYPE *t) {
 	else
 		return(FALSE);
 }
-/*
+
 void initialize() {
 	
 	// primitive data types
@@ -523,7 +522,7 @@ void initialize() {
 			setDeclaratorTypeAndKind(makeDummyIdentifier(),int_type,ID_PARM)
 		),ID_FUNC
 	);
-} */
+}
 
 void syntax_error(int i,char *s) {
 	syntax_err++;

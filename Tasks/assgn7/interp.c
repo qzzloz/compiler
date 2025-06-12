@@ -24,7 +24,8 @@ void dump_stack()
             printf(":  %08x   %d,%f\n", stack[i], stack[i], *(stack_f+i));
 	}
 	printf("\n=====================================\n");
-	}void runtime_error(int i,int a)
+	}
+void runtime_error(int i,int a)
 {   printf("runtime error at pc %d : ",a);
    switch (i) {
 	case 1: printf("devide by zero  \n");break;
