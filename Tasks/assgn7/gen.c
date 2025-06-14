@@ -173,6 +173,7 @@ void gen_expression(A_NODE *node){
                             gen_error(11,id->line);
                             break;
                     }
+                    break;
                 case ID_ENUM_LITERAL:
                     gen_code_i(LITI,0,id-> init);
                     break;
@@ -372,7 +373,7 @@ void gen_expression(A_NODE *node){
             if(node->type != node->rlink->type)
                 if(isFloatType(node->type))
                     gen_code_i(CVTF,0,0);
-                else
+                else if(isFloatType(node->rlink->type))
                     gen_code_i(CVTI,0,0);
             break;
         case N_EXP_MUL:
@@ -414,6 +415,7 @@ void gen_expression(A_NODE *node){
             break;
         case N_EXP_SUB:
             gen_expression(node-> llink);
+            gen_expression(node->rlink);
             if(isPointerOrArrayType(node->llink->type) &&
                 !isPointerOrArrayType(node->rlink->type)) {
                     gen_code_i(LITI,0,node->llink->type->element_type->size);
@@ -474,19 +476,16 @@ void gen_expression(A_NODE *node){
             break;
         case N_EXP_AND:
             gen_expression(node->llink);
-            gen_code_i(JPCR, 0, i=get_label());
+            gen_code_l(JPCR, 0, i=get_label());
             gen_expression(node->rlink);
             gen_label_number(i);
             break;
         case N_EXP_OR:
             gen_expression(node->llink);
-            gen_code_i(JPTR, 0, i=get_label());
+            gen_code_l(JPTR, 0, i=get_label());
             gen_expression(node->rlink);
             i=node->type->size;
-            if(i==1)
-                gen_code_i(STXB, 0, 0);
-            else
-                gen_code_i(STX,0, 1%4 ? i/4+1 : i/4);
+            gen_label_number(i);
             break;
         case N_EXP_ASSIGN:
                 gen_expression_left(node->llink);

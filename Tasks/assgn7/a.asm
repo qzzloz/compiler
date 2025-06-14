@@ -1,22 +1,81 @@
-	      INT    0, 32
+	      INT    0, 72
 	      SUP    0, main
 	      RET    0, 0
-main:
+ctoi:
 	      INT    0, 16
-	      LOD    1, 12
-	     LITI    0, -2045045632
-	     LITI    0, 1
-	     EQLI    0, 0
-	      JPC    0, L1
 	      INT    0, 12
 	      LDA    0, 12
-	      POP    0, 4
+	      LOD    1, 12
+	      POP    0, 5
 	     ADDR    0, printf
 	      CAL    0, 0
-L1:
+	      INT    0, 12
+	      LDA    0, 20
+	      LOD    1, 12
+	      POP    0, 5
+	     ADDR    0, printf
+	      CAL    0, 0
+	      LDA    1, -4
+	      LOD    1, 12
+	     LITI    0, 48
+	     SUBI    0, 0
+	      STO    0, 1
+	      RET    0, 0
+	      RET    0, 0
+d_itof:
+	      INT    0, 16
+	      LDA    1, -4
+	      LOD    0, 28
+	      LOD    1, 12
+	     CVTF    0, 0
+	     MULF    0, 0
+	      STO    0, 1
+	      RET    0, 0
+	      RET    0, 0
+main:
+	      INT    0, 20
+	      LDA    1, 16
+	     LITI    0, 50
+	     STXB    0, 0
+	      POP    0, 1
+	      INT    0, 12
+	      LDA    0, 32
+	      LOD    1, 16
+	      POP    0, 5
+	     ADDR    0, printf
+	      CAL    0, 0
+	      LDA    1, 12
+	      INT    0, 16
+	      LOD    1, 16
+	      POP    0, 4
+	     ADDR    0, ctoi
+	      CAL    0, 0
+	      STX    0, 1
+	      POP    0, 1
+	      INT    0, 12
+	      LDA    0, 48
+	      LOD    1, 12
+	      POP    0, 5
+	     ADDR    0, printf
+	      CAL    0, 0
+	      INT    0, 12
+	      LDA    0, 64
+	      INT    0, 16
+	      LOD    1, 12
+	      POP    0, 4
+	     ADDR    0, d_itof
+	      CAL    0, 0
+	      POP    0, 5
+	     ADDR    0, printf
+	      CAL    0, 0
 	      LDA    1, -4
 	     LITI    0, 0
 	      STO    0, 1
 	      RET    0, 0
 	      RET    0, 0
-.literal    12 "Color is green.\n"
+.literal    12 "%c\n"
+.literal    20 "%d\n"
+.literal    28 0.000000
+.literal    32 "before: %d\n"
+.literal    48 "after: %d\n"
+.literal    64 "%f\n"
